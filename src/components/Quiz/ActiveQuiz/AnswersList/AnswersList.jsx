@@ -1,11 +1,10 @@
 import React from 'react';
+import { AnswerItem } from './AnswerItem/AnswerItem';
 
-export const AnswersList = () => {
+export const AnswersList = (props) => {
   return (
     <ul>
-      {PaymentResponse.answers.map((answer, index) => {
-        <li></li>
-      })}
+      {props.answers.map((answer, index) => <AnswerItem key={index} answer={answer} />)}
     </ul>
   )
 };
