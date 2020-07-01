@@ -1,4 +1,4 @@
-export const state = {
+export const data = {
   // хранение вопросов, ответов, параметры голосования
   results: {}, // {[id]: "success" || "errror"}
   isFinished: false,
