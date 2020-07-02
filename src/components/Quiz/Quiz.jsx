@@ -8,26 +8,39 @@ export class Quiz extends Component {
     results: {}, // {[id]: "success" || "errror"}
     isFinished: false,
     activeQuestion: 0,
-    answerState: null, // {[id]: "success" || "errror"}
+    answerState: null, // информация о текущем ответе пользователя {[id]: "success" || "errror"}
   };
 
   onAnswerClickHandler = (answerId) => {
-    console.log('answerId>>', answerId);
+    if (this.state.answerState) {
+      const key = Object.keys(this.state.answerState)[0];
+      if (this.state.answerState[key] === 'success') {
+        return;
+      }
+    }
 
-    const question = data.quiz[this.state.activeQUestion];
+    const question = data.quiz[this.state.activeQuestion];
 
     if (question.rightAnswerId === answerId) {
+      this.setState({
+        answerState: { [answerId]: 'success' },
+      });
+
       const timeout = window.setTimeout(() => {
         if (this.isQuizFinished()) {
           console.log('Finished');
         } else {
           this.setState({
             activeQuestion: this.state.activeQuestion + 1,
+            answerState: null,
           });
         }
         window.clearTimeout(timeout);
-      }, 1000);
+      }, 2000);
     } else {
+      this.setState({
+        answerState: { [answerId]: 'error' },
+      });
     }
   };
 
@@ -50,6 +63,7 @@ export class Quiz extends Component {
             onAnswerClick={this.onAnswerClickHandler}
             quizLength={data.quiz.length}
             answerNumber={this.state.activeQuestion + 1}
+            state={this.state.answerState}
           />
         </div>
       </div>

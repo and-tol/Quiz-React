@@ -9,12 +9,14 @@ export const ActiveQuiz = (props) => {
         <p className='mb-3'>
           <span className='font-medium'>1. </span> {props.question}
         </p>
-        <span className=' w-24 text-right align-baseline'>
+        <span
+         className=' w-24 text-right align-baseline'>
           {props.answerNumber} из {props.quizLength}
         </span>
       </div>
 
       <AnswersList
+        state={props.state}
         answers={props.answers}
         id={props.id}
         onAnswerClick={props.onAnswerClick}
