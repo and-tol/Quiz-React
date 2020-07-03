@@ -14,6 +14,8 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
+      // error: '#e53e3e',
+      // success: '#38a169',
 
       black: '#000',
       white: '#fff',

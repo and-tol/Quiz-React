@@ -21,12 +21,16 @@ h1 {
   @apply text-3xl font-bold tracking-wider leading-6 my-6;
 }
 
-ul {
+/* ul {
   @apply list-none m-0 p-0;
-}
+} */
 
 .answer-item {
-  @apply border border-solid border-white rounded py-1 px-2 mb-1 cursor-pointer transition-colors duration-300 ease-in-out hover:bg-indigo-300;
+  @apply border border-solid border-white rounded py-1 px-2 mb-1 cursor-pointer transition-colors duration-300 ease-in-out;
+}
+
+.answer-item:hover {
+  @apply bg-indigo-300;
 }
 /* 
  hover:bg-indigo-300*/
@@ -35,10 +39,71 @@ ul {
   @apply bg-indigo-300;
 } */
 
-.answer-item.success {
-  @apply bg-green-500;
+:root {
+  --success: #38a169;
+  /* --success: @apply bg-green-500; */
+  --error: #e53e3e;
+  /* --error: @apply bg-pink-500; */
+}
+
+.answer-item.success:hover {
+  background-color: var(--success);
+  /* @apply bg-green-500; */
   /* background-color: #48bb78; */
 }
-.answer-item.error {
-  @apply bg-pink-500;
+.answer-item.error:hover {
+  /* @apply bg-pink-500; */
+  background-color: var(--error);
+}
+
+.finished {
+  /* @apply list-none p-0 m-0; */
+}
+
+.finished li span {
+  @apply font-semibold;
+}
+.finished li i {
+  @apply ml-3;
+}
+
+.btn {
+  @apply inline-block font-bold py-2 px-4 rounded mr-3 uppercase font-bold text-xs bg-teal-100;
+}
+
+.btn.primary:hover {
+  @apply bg-teal-200 text-white;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  @apply transition-shadow shadow-inner;
+}
+
+.btn:disabled {
+  @apply bg-gray-400 text-white cursor-not-allowed;
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+.btn-tail,
+.primary {
+  @apply text-teal-500;
+}
+.btn-tail:hover {
+  @apply bg-teal-200 text-white;
+}
+.btn-blue:hover {
+  @apply bg-blue-600;
+}
+
+.success-i {
+  color: var(--success);
+}
+.error-i {
+  color: var(--error);
 }

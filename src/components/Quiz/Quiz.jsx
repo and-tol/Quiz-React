@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { ActiveQuiz } from './ActiveQuiz/ActiveQuiz';
+import { FinishedQuiz } from '../FinishedQuiz/FinishedQuiz';
 // import { state } from '../../data/data';
 import { data } from '../../data/data';
 
 export class Quiz extends Component {
   state = {
-    results: {}, // {[id]: "success" || "errror"}
+    results: {}, // {[id]: "success" || "error"}
     isFinished: false,
     activeQuestion: 0,
     answerState: null, // информация о текущем ответе пользователя {[id]: "success" || "errror"}
@@ -14,21 +15,30 @@ export class Quiz extends Component {
   onAnswerClickHandler = (answerId) => {
     if (this.state.answerState) {
       const key = Object.keys(this.state.answerState)[0];
+
       if (this.state.answerState[key] === 'success') {
         return;
       }
     }
 
     const question = data.quiz[this.state.activeQuestion];
+    const results = this.state.results
 
     if (question.rightAnswerId === answerId) {
+      if (!results[question.id]) {
+        results[question.id] = 'success';
+      }
+
       this.setState({
         answerState: { [answerId]: 'success' },
+        results
       });
 
       const timeout = window.setTimeout(() => {
         if (this.isQuizFinished()) {
-          console.log('Finished');
+          this.setState({
+            isFinished: true,
+          });
         } else {
           this.setState({
             activeQuestion: this.state.activeQuestion + 1,
@@ -36,16 +46,27 @@ export class Quiz extends Component {
           });
         }
         window.clearTimeout(timeout);
-      }, 2000);
+      }, 1000);
     } else {
+      results[question.id] = 'error';
       this.setState({
         answerState: { [answerId]: 'error' },
+        results
       });
     }
   };
 
   isQuizFinished() {
     return this.state.activeQuestion + 1 === data.quiz.length;
+  }
+
+  retryHandler = () => {
+    this.setState({
+      results: {},
+      isFinished: false,
+      activeQuestion: 0,
+      answerState: null,
+    });
   }
 
   render() {
@@ -56,15 +77,23 @@ export class Quiz extends Component {
       >
         <h1 className='text-white'>Ответьте на все вопросы</h1>
         <div className='w-full'>
-          <ActiveQuiz
-            answers={data.quiz[this.state.activeQuestion].answers}
-            id={data.quiz[this.state.activeQuestion].id}
-            question={data.quiz[this.state.activeQuestion].question}
-            onAnswerClick={this.onAnswerClickHandler}
-            quizLength={data.quiz.length}
-            answerNumber={this.state.activeQuestion + 1}
-            state={this.state.answerState}
-          />
+          {this.state.isFinished ? (
+            <FinishedQuiz
+              results={this.state.results}
+              quiz={data.quiz}
+              onRetry={this.retryHandler}
+            />
+          ) : (
+            <ActiveQuiz
+              answers={data.quiz[this.state.activeQuestion].answers}
+              id={data.quiz[this.state.activeQuestion].id}
+              question={data.quiz[this.state.activeQuestion].question}
+              onAnswerClick={this.onAnswerClickHandler}
+              quizLength={data.quiz.length}
+              answerNumber={this.state.activeQuestion + 1}
+              state={this.state.answerState}
+            />
+          )}
         </div>
       </div>
     );

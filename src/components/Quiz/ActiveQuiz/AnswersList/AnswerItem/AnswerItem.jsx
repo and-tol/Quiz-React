@@ -1,7 +1,6 @@
 import React from 'react';
 
 export const AnswerItem = (props) => {
-  console.log('props', props)
 
   const classes = ['answer-item'];
 
