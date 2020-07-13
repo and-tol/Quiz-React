@@ -67,12 +67,19 @@ h1 {
   @apply ml-3;
 }
 
+/* --------- buttons styles ----------- */
+
 .btn {
   @apply inline-block font-bold py-2 px-4 rounded mr-3 uppercase font-bold text-xs bg-teal-100;
 }
 
 .btn.primary:hover {
   @apply bg-teal-200 text-white;
+}
+.btn.success-i:hover {
+  @apply text-white;
+  /* @apply bg-teal-200 text-white; */
+  background-color: rgba(var(--success), var(--bg-opacity));
 }
 
 .btn:focus {
@@ -102,8 +109,72 @@ h1 {
 }
 
 .success-i {
+  /* background-color: var(--success); */
   color: var(--success);
 }
 .error-i {
   color: var(--error);
+}
+
+/* -------------- side menu styles ------------- */
+
+.menu-toggle {
+  top: 2.5rem;
+  left: 2.5rem;
+  @apply fixed text-xl cursor-pointer text-white z-40 transition-all duration-200 ease-in;
+}
+
+.menu-toggle:hover {
+  @apply opacity-75;
+}
+
+.menu-toggle.open {
+  left: calc(20rem + 1rem);
+}
+
+/* ------- Drawer ------- */
+
+:root {
+  --maxWidth: 20rem;
+}
+
+.drawer {
+  transform: translate3d(0, 0, 0);
+  @apply fixed z-30 left-0 top-0 bottom-0 w-4/5 py-5 px-3 box-border bg-white transition-transform duration-200 ease-in;
+  /* max-w-xs  */
+  max-width: var(--maxWidth);
+}
+
+.drawer.close {
+  transform: translate3d(-20rem, 0, 0);
+  /* transform: translate3d(-(@apply max-w-xs),0,0); */
+}
+
+.drawer .active {
+  @apply bg-opacity-75;
+}
+
+
+/* Guiz List */
+.GuizList {
+  @apply flex justify-center pt-24 flex-grow w-full;
+  background: linear-gradient(90deg,#fd8355 0%,#f0576c 37%,#f78475 100%) ;
+}
+
+/* Auth */
+.Auth {
+  background: linear-gradient(270deg,#cef2fa 0%,#59bfef 100%) ;
+}
+
+/* Input */
+.Input {
+  @apply mb-4;
+}
+.Input.invalid>input  {
+  @apply border-red-500;
+
+}
+
+.Input.invalid {
+  @apply  text-red-500
 }

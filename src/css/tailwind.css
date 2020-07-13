@@ -17953,6 +17953,8 @@ h1 {
   margin-left: 0.75rem;
 }
 
+/* --------- buttons styles ----------- */
+
 .btn {
   display: inline-block;
   font-weight: 700;
@@ -17965,6 +17967,9 @@ h1 {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 0.75rem;
+  --bg-opacity: 1;
+  background-color: #e6fffa;
+  background-color: rgba(230, 255, 250, var(--bg-opacity));
 }
 
 .btn.primary:hover {
@@ -17974,6 +17979,14 @@ h1 {
   --text-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
+}
+
+.btn.success-i:hover {
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  /* @apply bg-teal-200 text-white; */
+  background-color: rgba(var(--success), var(--bg-opacity));
 }
 
 .btn:focus {
@@ -18006,9 +18019,6 @@ h1 {
 
 .btn-tail,
 .primary {
-  --bg-opacity: 1;
-  background-color: #e6fffa;
-  background-color: rgba(230, 255, 250, var(--bg-opacity));
   --text-opacity: 1;
   color: #38b2ac;
   color: rgba(56, 178, 172, var(--text-opacity));
@@ -18030,11 +18040,110 @@ h1 {
 }
 
 .success-i {
+  /* background-color: var(--success); */
   color: var(--success);
 }
 
 .error-i {
   color: var(--error);
+}
+
+/* -------------- side menu styles ------------- */
+
+.menu-toggle {
+  top: 2.5rem;
+  left: 2.5rem;
+  position: fixed;
+  font-size: 1.25rem;
+  cursor: pointer;
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  z-index: 40;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.menu-toggle:hover {
+  opacity: 0.75;
+}
+
+.menu-toggle.open {
+  left: calc(20rem + 1rem);
+}
+
+/* ------- Drawer ------- */
+
+:root {
+  --maxWidth: 20rem;
+}
+
+.drawer {
+  transform: translate3d(0, 0, 0);
+  position: fixed;
+  z-index: 30;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 80%;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  box-sizing: border-box;
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  transition-property: transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  /* max-w-xs  */
+  max-width: var(--maxWidth);
+}
+
+.drawer.close {
+  transform: translate3d(-20rem, 0, 0);
+  /* transform: translate3d(-(@apply max-w-xs),0,0); */
+}
+
+.drawer .active {
+  --bg-opacity: 0.75;
+}
+
+/* Guiz List */
+
+.GuizList {
+  display: flex;
+  justify-content: center;
+  padding-top: 6rem;
+  flex-grow: 1;
+  width: 100%;
+  background: linear-gradient(90deg,#fd8355 0%,#f0576c 37%,#f78475 100%) ;
+}
+
+/* Auth */
+
+.Auth {
+  background: linear-gradient(270deg,#cef2fa 0%,#59bfef 100%) ;
+}
+
+/* Input */
+
+.Input {
+  margin-bottom: 1rem;
+}
+
+.Input.invalid>input  {
+  --border-opacity: 1;
+  border-color: #f56565;
+  border-color: rgba(245, 101, 101, var(--border-opacity));
+}
+
+.Input.invalid {
+  --text-opacity: 1;
+  color: #f56565;
+  color: rgba(245, 101, 101, var(--text-opacity))
 }
 
 @media (min-width: 640px) {

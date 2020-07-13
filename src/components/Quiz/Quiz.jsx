@@ -4,7 +4,7 @@ import { FinishedQuiz } from '../FinishedQuiz/FinishedQuiz';
 // import { state } from '../../data/data';
 import { data } from '../../data/data';
 
-export class Quiz extends Component {
+class Quiz extends Component {
   state = {
     results: {}, // {[id]: "success" || "error"}
     isFinished: false,
@@ -22,7 +22,7 @@ export class Quiz extends Component {
     }
 
     const question = data.quiz[this.state.activeQuestion];
-    const results = this.state.results
+    const results = this.state.results;
 
     if (question.rightAnswerId === answerId) {
       if (!results[question.id]) {
@@ -31,7 +31,7 @@ export class Quiz extends Component {
 
       this.setState({
         answerState: { [answerId]: 'success' },
-        results
+        results,
       });
 
       const timeout = window.setTimeout(() => {
@@ -51,7 +51,7 @@ export class Quiz extends Component {
       results[question.id] = 'error';
       this.setState({
         answerState: { [answerId]: 'error' },
-        results
+        results,
       });
     }
   };
@@ -67,7 +67,9 @@ export class Quiz extends Component {
       activeQuestion: 0,
       answerState: null,
     });
-  }
+  };
+
+  componentDidMount() {}
 
   render() {
     return (
@@ -99,3 +101,5 @@ export class Quiz extends Component {
     );
   }
 }
+
+export { Quiz };

@@ -1,14 +1,14 @@
 import React from 'react';
-import { Button } from "./../../UI/Button/Button";
+import { Button } from './../../UI/Button/Button';
+import { Link } from 'react-router-dom';
 
 const FinishedQuiz = (props) => {
-
   const succesCount = Object.keys(props.results).reduce((total, key) => {
-    if (props.results[key]=== 'success') {
-      total++
+    if (props.results[key] === 'success') {
+      total++;
     }
-    return total
-  }, 0)
+    return total;
+  }, 0);
 
   return (
     <section className='p-5 text-white border-2 border-white border-solid rounded-md box-border my-0'>
@@ -39,10 +39,9 @@ const FinishedQuiz = (props) => {
         <Button onClick={props.onRetry} type='primary'>
           Повторить
         </Button>
-        <Button type='success-i'>
-          Перейти в список тестов
-        </Button>
-
+        <Link to='/'>
+        <Button type='success-i'>Перейти в список тестов</Button>
+        </Link>
       </div>
     </section>
   );
