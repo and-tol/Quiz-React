@@ -18,7 +18,7 @@ export function Input(props) {
         {props.label}
       </label>
       <input
-        className='block box-border border border-solid divide-orange-200 p-2 mx-0 mb-1 w-full outline-none transition-all duration-300 ease-in-out'
+        className='block box-border border border-solid border-orange-200 p-2 mx-0 mb-1 w-full outline-none transition-all duration-300 ease-in-out'
         type={inputType}
         id={htmlFor}
         value={props.value}
