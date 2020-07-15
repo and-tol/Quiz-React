@@ -17888,6 +17888,22 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+/* Common Style */
+
+.Section {
+  display: flex;
+  justify-content: center;
+  padding-top: 6rem;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.Form {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
 /* ul {
   @apply list-none m-0 p-0;
 } */
@@ -18114,18 +18130,13 @@ h1 {
 /* Guiz List */
 
 .GuizList {
-  display: flex;
-  justify-content: center;
-  padding-top: 6rem;
-  flex-grow: 1;
-  width: 100%;
-  background: linear-gradient(90deg,#fd8355 0%,#f0576c 37%,#f78475 100%) ;
+  background: linear-gradient(90deg, #fd8355 0%, #f0576c 37%, #f78475 100%);
 }
 
 /* Auth */
 
 .Auth {
-  background: linear-gradient(270deg,#cef2fa 0%,#59bfef 100%) ;
+  background: linear-gradient(270deg, #cef2fa 0%, #59bfef 100%);
 }
 
 /* Input */
@@ -18134,7 +18145,7 @@ h1 {
   margin-bottom: 1rem;
 }
 
-.Input.invalid>input  {
+.Input.invalid > input {
   --border-opacity: 1;
   border-color: #f56565;
   border-color: rgba(245, 101, 101, var(--border-opacity));
@@ -18143,7 +18154,13 @@ h1 {
 .Input.invalid {
   --text-opacity: 1;
   color: #f56565;
-  color: rgba(245, 101, 101, var(--text-opacity))
+  color: rgba(245, 101, 101, var(--text-opacity));
+}
+
+/* Quiz Creator */
+
+.QuizCreator {
+  background: linear-gradient(270deg, #f0613c 0%, #f0783c 100%);
 }
 
 @media (min-width: 640px) {
@@ -87133,3 +87150,4 @@ h1 {
     transition-delay: 1000ms;
   }
 }
+

@@ -19,7 +19,7 @@ class QuizList extends Component {
 
   render() {
     return (
-      <div className='GuizList flex justify-center pt-24 flex-grow w-full'>
+      <div className='Section GuizList'>
         <section>
           <h1 className='text-white'>Список тестов</h1>
           <ul>{this.renderQuizes()}</ul>

@@ -21,6 +21,14 @@ h1 {
   @apply text-3xl font-bold tracking-wider leading-6 my-6;
 }
 
+/* Common Style */
+.Section {
+  @apply flex justify-center pt-24 flex-grow w-full;
+}
+
+.Form {
+  @apply shadow p-4 rounded;
+}
 /* ul {
   @apply list-none m-0 p-0;
 } */
@@ -154,27 +162,30 @@ h1 {
   @apply bg-opacity-75;
 }
 
-
 /* Guiz List */
 .GuizList {
-  @apply flex justify-center pt-24 flex-grow w-full;
-  background: linear-gradient(90deg,#fd8355 0%,#f0576c 37%,#f78475 100%) ;
+  background: linear-gradient(90deg, #fd8355 0%, #f0576c 37%, #f78475 100%);
 }
 
 /* Auth */
 .Auth {
-  background: linear-gradient(270deg,#cef2fa 0%,#59bfef 100%) ;
+  background: linear-gradient(270deg, #cef2fa 0%, #59bfef 100%);
 }
 
 /* Input */
 .Input {
   @apply mb-4;
 }
-.Input.invalid>input  {
+.Input.invalid > input {
   @apply border-red-500;
-
 }
 
 .Input.invalid {
-  @apply  text-red-500
+  @apply text-red-500;
 }
+
+/* Quiz Creator */
+.QuizCreator {
+  background: linear-gradient(270deg, #f0613c 0%, #f0783c 100%);
+}
+

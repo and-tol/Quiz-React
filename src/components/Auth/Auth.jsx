@@ -103,12 +103,12 @@ class Auth extends Component {
 
   render() {
     return (
-      <section className='Auth flex justify-center pt-24 flex-grow w-full'>
+      <section className='Section Auth'>
         <div className='w-full max-w-xl py-0 px-5'>
           <h1 className='text-white align-center'>Авторизация</h1>
           <form
             onSubmit={this.submitHandler}
-            className='bg-indigo-100 shadow p-4 rounded'
+            className='Form bg-indigo-100'
           >
             {this.renderInputs()}
 
