@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { ActiveQuiz } from './ActiveQuiz/ActiveQuiz';
 import { FinishedQuiz } from '../FinishedQuiz/FinishedQuiz';
+import { Loader } from '../../UI/Loader/Loader';
 // import { state } from '../../data/data';
-import { data } from '../../data/data';
+// import { data } from '../../data/data';
+import axios from '../../utils/axios-quiz';
 
 class Quiz extends Component {
   state = {
@@ -10,6 +12,8 @@ class Quiz extends Component {
     isFinished: false,
     activeQuestion: 0,
     answerState: null, // информация о текущем ответе пользователя {[id]: "success" || "errror"}
+    quiz: [],
+    loading: true,
   };
 
   onAnswerClickHandler = (answerId) => {
@@ -21,7 +25,7 @@ class Quiz extends Component {
       }
     }
 
-    const question = data.quiz[this.state.activeQuestion];
+    const question = this.state.quiz[this.state.activeQuestion];
     const results = this.state.results;
 
     if (question.rightAnswerId === answerId) {
@@ -57,7 +61,7 @@ class Quiz extends Component {
   };
 
   isQuizFinished() {
-    return this.state.activeQuestion + 1 === data.quiz.length;
+    return this.state.activeQuestion + 1 === this.state.quiz.length;
   }
 
   retryHandler = () => {
@@ -69,7 +73,22 @@ class Quiz extends Component {
     });
   };
 
-  componentDidMount() {}
+  async componentDidMount() {
+    try {
+      const response = await axios.get(
+        `quizes/${this.props.match.params.id}.json`
+      );
+      const quiz = response.data;
+
+      this.setState({
+        quiz,
+        loading: false,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    console.log('Quiz ID', this.props.match.params.id);
+  }
 
   render() {
     return (
@@ -78,25 +97,29 @@ class Quiz extends Component {
         style={{ width: '700px' }}
       >
         <h1 className='text-white'>Ответьте на все вопросы</h1>
-        <div className='w-full'>
-          {this.state.isFinished ? (
-            <FinishedQuiz
-              results={this.state.results}
-              quiz={data.quiz}
-              onRetry={this.retryHandler}
-            />
-          ) : (
-            <ActiveQuiz
-              answers={data.quiz[this.state.activeQuestion].answers}
-              id={data.quiz[this.state.activeQuestion].id}
-              question={data.quiz[this.state.activeQuestion].question}
-              onAnswerClick={this.onAnswerClickHandler}
-              quizLength={data.quiz.length}
-              answerNumber={this.state.activeQuestion + 1}
-              state={this.state.answerState}
-            />
-          )}
-        </div>
+        {this.state.loading ? (
+          <Loader />
+        ) : (
+          <div className='w-full'>
+            {this.state.isFinished ? (
+              <FinishedQuiz
+                results={this.state.results}
+                quiz={this.state.quiz}
+                onRetry={this.retryHandler}
+              />
+            ) : (
+              <ActiveQuiz
+                answers={this.state.quiz[this.state.activeQuestion].answers}
+                id={this.state.quiz[this.state.activeQuestion].id}
+                question={this.state.quiz[this.state.activeQuestion].question}
+                onAnswerClick={this.onAnswerClickHandler}
+                quizLength={this.state.quiz.length}
+                answerNumber={this.state.activeQuestion + 1}
+                state={this.state.answerState}
+              />
+            )}
+          </div>
+        )}
       </div>
     );
   }

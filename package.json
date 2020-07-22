@@ -6,11 +6,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
     "is_js": "^0.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "redux-devtools-extension": "^2.13.8"
   },
   "scripts": {
     "tailwindcss": "npx tailwind build src/css/index.css -c src/css/tailwind.config.js -o src/css/tailwind.css -w",
@@ -37,6 +39,9 @@
   "devDependencies": {
     "autoprefixer": "^9.8.4",
     "postcss-cli": "^7.1.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "tailwindcss": "^1.4.6"
   }
 }
