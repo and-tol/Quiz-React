@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { MenuToggle } from '../MenuToggle/MenuToggle';
 import { Drawer } from '../Drawer/Drawer';
 
 class Layout extends Component {
-  state = {
-    menu: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      menu: false,
+    };
+  }
 
   toggleMenuHandler = () => {
     this.setState({
@@ -22,7 +28,11 @@ class Layout extends Component {
   render() {
     return (
       <div className='flex flex-col h-screen bg-teal-400'>
-        <Drawer isOpen={this.state.menu} onClose={this.menuCloseHandler} />
+        <Drawer
+          isOpen={this.state.menu}
+          onClose={this.menuCloseHandler}
+          isAuthenticated={this.props.isAuthenticated}
+        />
 
         <MenuToggle
           onToggle={this.toggleMenuHandler}
@@ -37,4 +47,8 @@ class Layout extends Component {
   }
 }
 
-export { Layout };
+const mapStateToProps = (state) => ({
+  isAuthenticated: !!state.auth.token,
+});
+
+export default connect(mapStateToProps)(Layout);
