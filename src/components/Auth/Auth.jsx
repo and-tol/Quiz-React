@@ -1,71 +1,61 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import is from 'is_js';
+
 import { Button } from '../../UI/Button/Button';
 import { Input } from '../../UI/Input/Input';
-import is from 'is_js';
-import axios from 'axios';
 
+import { auth } from '../../store/actions/auth';
 class Auth extends Component {
-  state = {
-    formControls: {
-      email: {
-        value: '',
-        type: 'email',
-        label: 'Э-почта',
-        errorMessage: 'Введите корректный адрес э-почты',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          email: true,
-        },
-      },
-      password: {
-        value: '',
-        type: 'password',
-        label: 'Пароль',
-        errorMessage: 'Введите корректный пароль',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          // password: true,
-          minLength: 6,
-        },
-      },
-    },
-  };
+  constructor(props) {
+    super(props);
 
-  loginHandler = async () => {
-    const authData = {
-      email: this.state.formControls.email.value,
-      password: this.state.formControls.password.value,
-      returnSecureToken: true,
+    this.state = {
+      formControls: {
+        email: {
+          value: '',
+          type: 'email',
+          label: 'Э-почта',
+          errorMessage: 'Введите корректный адрес э-почты',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            email: true,
+          },
+        },
+        password: {
+          value: '',
+          type: 'password',
+          label: 'Пароль',
+          errorMessage: 'Введите корректный пароль',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            // password: true,
+            minLength: 6,
+          },
+        },
+      },
     };
-    try {
-      const response = await axios.post(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC6EyyYge5mHGBkXU5TPAXXB4hdYAZUprU',
-        authData
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+  }
+
+  loginHandler = () => {
+    this.props.auth(
+      this.state.formControls.email.value,
+      this.state.formControls.password.value,
+      true
+    );
   };
-  registerHandler = async () => {
-    const authData = {
-      email: this.state.formControls.email.value,
-      password: this.state.formControls.password.value,
-      returnSecureToken: true,
-    };
-    try {
-      const response = await axios.post(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC6EyyYge5mHGBkXU5TPAXXB4hdYAZUprU',
-        authData
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+  
+  registerHandler = () => {
+    this.props.auth(
+      this.state.formControls.email.value,
+      this.state.formControls.password.value,
+      false
+    );
   };
 
   submitHandler = (event) => {
@@ -160,4 +150,8 @@ class Auth extends Component {
   }
 }
 
-export { Auth };
+const mapDispatchToProps = {
+  auth: (email, password, isLogin) => auth(email, password, isLogin),
+};
+
+export default connect(null, mapDispatchToProps)(Auth);
