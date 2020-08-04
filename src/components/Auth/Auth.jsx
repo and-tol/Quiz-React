@@ -5,36 +5,40 @@ import is from 'is_js';
 import axios from 'axios';
 
 class Auth extends Component {
-  state = {
-    formControls: {
-      email: {
-        value: '',
-        type: 'email',
-        label: 'Э-почта',
-        errorMessage: 'Введите корректный адрес э-почты',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          email: true,
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      formControls: {
+        email: {
+          value: '',
+          type: 'email',
+          label: 'Э-почта',
+          errorMessage: 'Введите корректный адрес э-почты',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            email: true,
+          },
+        },
+        password: {
+          value: '',
+          type: 'password',
+          label: 'Пароль',
+          errorMessage: 'Введите корректный пароль',
+          valid: false,
+          touched: false,
+          validation: {
+            required: true,
+            // password: true,
+            minLength: 6,
+          },
         },
       },
-      password: {
-        value: '',
-        type: 'password',
-        label: 'Пароль',
-        errorMessage: 'Введите корректный пароль',
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          // password: true,
-          minLength: 6,
-        },
-      },
-    },
-  };
-
+    };
+  }
+  
   loginHandler = async () => {
     const authData = {
       email: this.state.formControls.email.value,
@@ -46,23 +50,25 @@ class Auth extends Component {
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC6EyyYge5mHGBkXU5TPAXXB4hdYAZUprU',
         authData
       );
-      console.log(response.data);
+
     } catch (error) {
       console.log(error);
     }
   };
+
   registerHandler = async () => {
     const authData = {
       email: this.state.formControls.email.value,
       password: this.state.formControls.password.value,
       returnSecureToken: true,
     };
+
     try {
       const response = await axios.post(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC6EyyYge5mHGBkXU5TPAXXB4hdYAZUprU',
         authData
       );
-      console.log(response.data);
+
     } catch (error) {
       console.log(error);
     }
