@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Layout from './UI/Layout/Layout';
+import Quiz from './components/Quiz/Quiz';
+import Auth from './components/Auth/Auth';
+import QuizCreator from './components/QuizCreator/QuizCreator';
+import QuizList from './components/QuizList/QuizList';
+import Logout from './components/Logout/Logout';
+import {autoLogin} from './store/actions/auth'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    this.props.autoLogin();
+  }
+  render() {
+    let routes = (
+      <Switch>
+        <Route path='/auth' component={Auth} />
+        <Route path='/quiz/:id' component={Quiz} />
+        <Route exact path='/' component={QuizList} />
+        <Redirect to='/' />
+      </Switch>
+    );
+
+    if (this.props.isAuthenticated) {
+      routes = (
+        <Switch>
+          <Route exact path='/quiz-creator' component={QuizCreator} />
+          <Route path='/quiz/:id' component={Quiz} />
+          <Route path='/logout' component={Logout} />
+          <Route exact path='/' component={QuizList} />
+          <Redirect to='/' />
+        </Switch>
+      );
+    }
+    return <Layout>{routes}</Layout>;
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  isAuthenticated: !!state.auth.token,
+});
+
+const mapDispatchToProps = {
+  autoLogin: () => autoLogin(),
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+
+// ? withRouter не обязателен

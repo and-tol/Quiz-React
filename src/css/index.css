@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1 {
+  @apply text-3xl font-bold tracking-wider leading-6 my-6;
+}
+
+/* Common Style */
+.Section {
+  @apply flex justify-center pt-24 flex-grow w-full;
+}
+
+.Form {
+  @apply shadow p-4 rounded;
+}
+/* ul {
+  @apply list-none m-0 p-0;
+} */
+
+.answer-item {
+  @apply border border-solid border-white rounded py-1 px-2 mb-1 cursor-pointer transition-colors duration-300 ease-in-out;
+}
+
+.answer-item:hover {
+  @apply bg-indigo-300;
+}
+/* 
+ hover:bg-indigo-300*/
+
+/* .answer-item:hover{
+  @apply bg-indigo-300;
+} */
+
+:root {
+  --success: #38a169;
+  /* --success: @apply bg-green-500; */
+  --error: #e53e3e;
+  /* --error: @apply bg-pink-500; */
+}
+
+.answer-item.success:hover {
+  background-color: var(--success);
+  /* @apply bg-green-500; */
+  /* background-color: #48bb78; */
+}
+.answer-item.error:hover {
+  /* @apply bg-pink-500; */
+  background-color: var(--error);
+}
+
+.finished {
+  /* @apply list-none p-0 m-0; */
+}
+
+.finished li span {
+  @apply font-semibold;
+}
+.finished li i {
+  @apply ml-3;
+}
+
+/* --------- buttons styles ----------- */
+
+.btn {
+  @apply inline-block font-bold py-2 px-4 rounded mr-3 uppercase font-bold text-xs bg-teal-100;
+}
+
+.btn.primary:hover {
+  @apply bg-teal-200 text-white;
+}
+.btn.success-i:hover {
+  @apply text-white;
+  /* @apply bg-teal-200 text-white; */
+  background-color: rgba(var(--success), var(--bg-opacity));
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  @apply transition-shadow shadow-inner;
+}
+
+.btn:disabled {
+  @apply bg-gray-400 text-white cursor-not-allowed;
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+.btn-tail,
+.primary {
+  @apply text-teal-500;
+}
+.btn-tail:hover {
+  @apply bg-teal-200 text-white;
+}
+.btn-blue:hover {
+  @apply bg-blue-600;
+}
+
+.success-i {
+  /* background-color: var(--success); */
+  color: var(--success);
+}
+.error-i {
+  color: var(--error);
+}
+
+/* -------------- side menu styles ------------- */
+
+.menu-toggle {
+  top: 2.5rem;
+  left: 2.5rem;
+  @apply fixed text-xl cursor-pointer text-white z-40 transition-all duration-200 ease-in;
+}
+
+.menu-toggle:hover {
+  @apply opacity-75;
+}
+
+.menu-toggle.open {
+  left: calc(20rem + 1rem);
+}
+
+/* ------- Drawer ------- */
+
+:root {
+  --maxWidth: 20rem;
+}
+
+.drawer {
+  transform: translate3d(0, 0, 0);
+  @apply fixed z-30 left-0 top-0 bottom-0 w-4/5 py-5 px-3 box-border bg-white transition-transform duration-200 ease-in;
+  /* max-w-xs  */
+  max-width: var(--maxWidth);
+}
+
+.drawer.close {
+  transform: translate3d(-20rem, 0, 0);
+  /* transform: translate3d(-(@apply max-w-xs),0,0); */
+}
+
+.drawer .active {
+  @apply bg-opacity-75;
+}
+
+/* Guiz List */
+.GuizList {
+  background: linear-gradient(90deg, #fd8355 0%, #f0576c 37%, #f78475 100%);
+}
+
+/* Auth */
+.Auth {
+  background: linear-gradient(270deg, #cef2fa 0%, #59bfef 100%);
+}
+
+/* Input */
+.Input {
+  @apply mb-4;
+}
+.Input.invalid > input {
+  @apply border-red-500;
+}
+
+.Input.invalid {
+  @apply text-red-500;
+}
+
+/* Quiz Creator */
+.QuizCreator {
+  background: linear-gradient(270deg, #f0613c 0%, #f0783c 100%);
+}
+
