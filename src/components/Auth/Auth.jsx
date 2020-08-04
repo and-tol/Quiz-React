@@ -9,8 +9,13 @@ import { Input } from '../../UI/Input/Input';
 import { auth } from '../../store/actions/auth';
 class Auth extends Component {
   constructor(props) {
+<<<<<<< HEAD
     super(props);
 
+=======
+    super(props)
+  
+>>>>>>> f631dd952dcd93e2e84701f8e253ec0e227e0ee0
     this.state = {
       formControls: {
         email: {
