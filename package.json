@@ -2,6 +2,11 @@
   "name": "quiz",
   "version": "0.1.0",
   "private": true,
+  "description": "quiz project on React with form authtenification on server - get and post requests",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/and-tol/Quiz-React.git"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.7",
